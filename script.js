@@ -13,14 +13,14 @@ function computerPlay(){
 
 function playRound(playerSelection,computerSelection){
     playerSelection = playerSelection.toLowerCase();
-    let winMsg = "";
-    let play = "";
+    let winMsg = "";  // this string is for the winner message
+    let play = "";  // this string is for the instance that happened
 
-    if(playerSelection == computerSelection){
+    if(playerSelection == computerSelection){   // checks for tie instance
         winMsg = "It's a tie! ";
         play = `${playerSelection} ties with ${playerSelection}`;
     }
-    else if((playerSelection == "rock" || computerSelection == "rock") && (playerSelection == "paper" || computerSelection == "paper")  ){
+    else if((playerSelection == "rock" || computerSelection == "rock") && (playerSelection == "paper" || computerSelection == "paper")  ){  // checks for rock/paper instance
         if(playerSelection == "paper")
             winMsg = "Player Wins! ";
         else
@@ -28,7 +28,7 @@ function playRound(playerSelection,computerSelection){
 
         play = "Paper Beats Rock!";
     }
-    else if((playerSelection == "scissor" || computerSelection == "scissor") && (playerSelection == "paper" || computerSelection == "paper")  ){
+    else if((playerSelection == "scissor" || computerSelection == "scissor") && (playerSelection == "paper" || computerSelection == "paper")  ){  // checks for scissor/paper instance
         if(playerSelection == "scissor")
             winMsg = "Player Wins! ";
         else
@@ -36,7 +36,7 @@ function playRound(playerSelection,computerSelection){
 
         play = "Scissor Beats Paper!";
     }
-    else{
+    else{  // checks for rock/scissor instance
         if(playerSelection == "rock")
             winMsg = "Player Wins! ";
         else
@@ -45,7 +45,7 @@ function playRound(playerSelection,computerSelection){
         play = "Rock Beats Scissor!";
     }
 
-    console.log(winMsg+play);
+    console.log(winMsg+play);   // prints the result
     return winMsg + play;
 }
 
@@ -54,21 +54,21 @@ function game(){
     let playerWins = 0;
     let computerWins = 0;
 
-    while((playerWins < 5) && computerWins < 5){
+    while((playerWins < 5) && computerWins < 5){  // prompt the user until either player has 5 wins
         let input = prompt("Type either Rock, Paper, of Scissor");
         input = input.toLowerCase();
-        if((input != 'rock') && (input != 'paper') && (input != 'scissor')){
+        if((input != 'rock') && (input != 'paper') && (input != 'scissor')){   // check to make sure the users choice is valid
             alert("Your choice isn't valid, please choose rock, paper, or scissor");
             continue;
         }
         let result = playRound(input,computerPlay());
 
-        if(result.match("Computer"))
+        if(result.match("Computer"))  // check if Computer won
         computerWins++;
-        else if(result.match("Player"))
+        else if(result.match("Player"))  // check if Player won
         playerWins++;
-        else{
-
+        else{  
+            // tie occured
         }
         console.log(`score: ${playerWins}:${computerWins}`);
 
@@ -76,8 +76,8 @@ function game(){
 
     }
 
-    if(playerWins == 5)
+    if(playerWins == 5)  // Player won
     console.log("PLAYER WINS THE GAME");
-    else
+    else                 // Computer won
     console.log("COMPUTER WINS THE GAME");
 }
