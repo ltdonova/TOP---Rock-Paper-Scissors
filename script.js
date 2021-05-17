@@ -1,4 +1,12 @@
 
+var score =document.querySelector('div.score a');
+var roundEvent = document.querySelector('div.roundEvent a');
+var winner = document.querySelector('div.winner a');
+
+var playerWins = 0;
+var computerWins = 0;
+
+
 function computerPlay(){
     let randomNum = Math.floor(Math.random() * 3) + 1;  // Generate random number to decides the computers choice of Rock/Paper/Scissor
 
@@ -46,9 +54,34 @@ function playRound(playerSelection,computerSelection){
     }
 
     console.log(winMsg+play);   // prints the result
+    roundEvent.textContent = winMsg+play;
+    updateScore(winMsg);
     return winMsg + play;
 }
 
+function updateScore(winMsg){
+    if(playerWins == 0 && computerWins == 0)
+        winner.textContent = "";
+    if(winMsg.match("Computer"))  // check if Computer won
+    computerWins++;
+    else if(winMsg.match("Player"))  // check if Player won
+    playerWins++;
+    else{  
+        // tie occured
+    }
+    score.textContent= `${playerWins}:${computerWins}`;
+
+    if(playerWins > 4 || computerWins > 4){
+        if(playerWins == 5)  // Player won
+        winner.textContent = "PLAYER WINS THE GAME";
+        else                 // Computer won
+        winner.textContent = "COMPUTER WINS THE GAME";
+
+        playerWins = 0;
+        computerWins = 0;
+    }
+
+}
 
 function game(){
     let playerWins = 0;
@@ -81,3 +114,7 @@ function game(){
     else                 // Computer won
     console.log("COMPUTER WINS THE GAME");
 }
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach(button => button.addEventListener('click', () => playRound(button.id,computerPlay())));
